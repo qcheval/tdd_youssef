@@ -7,13 +7,11 @@ class ProductDatabase {
     private var productList: ArrayList<Product> = ArrayList()
 
     fun createProduct(name: String, price: Float): Product? {
+        return when {
+            name.isEmpty() ||
+                    price < 0.0f -> null
 
-        return if (name.isEmpty()) {
-            null
-        } else if (price < 0.0f) {
-            null
-        } else {
-            Product(0, name, price)
+            else -> Product(0, name, price)
         }
     }
 }

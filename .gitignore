@@ -3,6 +3,7 @@
 local.properties
 .idea/**
 .idea/*.xml
+.idea/gradle.xml
 .DS_Store
 build
 captures

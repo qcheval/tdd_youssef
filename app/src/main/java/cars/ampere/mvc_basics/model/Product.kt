@@ -1,3 +1,5 @@
 package cars.ampere.mvc_basics.model
 
-data class Product(val id: Int, val name: String, val price: Float)
+import java.util.UUID
+
+data class Product(val id: UUID, val name: String, val price: Float)
