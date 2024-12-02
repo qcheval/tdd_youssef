@@ -8,7 +8,12 @@ class ProductDatabase {
 
     fun createProduct(name: String, price: Float): Product? {
 
-
-        return Product(0, name, price)
+        return if (name.isEmpty()) {
+            null
+        } else if (price < 0.0f) {
+            null
+        } else {
+            Product(0, name, price)
+        }
     }
 }
