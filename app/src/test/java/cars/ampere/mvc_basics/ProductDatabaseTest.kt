@@ -11,11 +11,11 @@ class ProductDatabaseTest {
         val database: ProductDatabase = ProductDatabase()
 
         // when
-        val product = database.createProduct("", 0.0f)
+        val product = database.createProduct("chat", 10.0f)
 
         // then
-        assert(product?.name == "")
-        assert(product?.price == 0.0f)
+        assert(product?.name == "chat")
+        assert(product?.price == 10.0f)
     }
 
     @Test
