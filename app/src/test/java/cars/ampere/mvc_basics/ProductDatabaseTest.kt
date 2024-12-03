@@ -1,7 +1,6 @@
 package cars.ampere.mvc_basics
 
 import cars.ampere.mvc_basics.db.ProductDatabase
-import cars.ampere.mvc_basics.model.Product
 import org.junit.Test
 import java.util.UUID
 
@@ -65,11 +64,13 @@ class ProductDatabaseTest {
         val product2 = database.createProduct("youssef", 100.0f)
 
         // when i request all products from database
-        val all_products = database.request_products_from_database(database.productList)
+        val productList = database.getProductList()
+        val productListTest = listOf(product1, product2)
 
         // then database should return all products.
         // List size is the same as the number of products created in the given above
-        assert(all_products == database.productList.size)
+        assert(productList.size == 2)
+        assert(productList == productListTest)
 
     }
 
@@ -80,31 +81,75 @@ class ProductDatabaseTest {
         val product1 = database.createProduct("quentin", 10.0f)
 
         // when i request a product from the database with a specific id
-        val product_test = database.request_a_product_from_the_data_base_wiht_an_id(product1.id)
+        val productTest = database.requestProductFromDataBaseWithId(product1!!.id)
 
         // then the database returns the right product (similar id, name and price)
-        assert(product1 == product_test)
+        assert(product1 == productTest)
     }
 
     @Test
     fun database_should_return_product_starting_with_string() {
+        /*
         // given
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
+        val product2 = database.createProduct("youssef", 100.0f)
+        val product3 = database.createProduct("youssef2", 100.0f)
+        val product4 = database.createProduct("youpii", 10000.0f)
+        val product5 = database.createProduct("yauhoo", 10000.0f)
+        val product6 = database.createProduct("yoaahoo", 10000.0f)
+        val product7 = database.createProduct("yauyou", 10000.0f)
+        val product8 = database.createProduct("y", 10000.0f)
+
         // when
+        val testProductList1 = database.grepForProducts("you")
+        val testProductList2 = listOf(product2, product3, product4)
         // then
+        assert (testProductList1  == testProductList2)
+        */
     }
 
     @Test
     fun database_should_return_products_with_higher_price_than() {
         // given
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
+        val product2 = database.createProduct("youssef", 100.0f)
+        val product3 = database.createProduct("youssef2", 100.0f)
+        val product4 = database.createProduct("youpii", 10000.0f)
+        val product5 = database.createProduct("yauhoo", 101.0f)
+        val product6 = database.createProduct("yoaahoo", 99.0f)
+        val product7 = database.createProduct("yauyou", 200.0f)
+        val product8 = database.createProduct("y", 100000.0f)
+
         // when
+        val testProductList1 = database.higherPrice(100.0f)
+        val testProductList2 = listOf(product4, product5, product7, product8)
+
         // then
+        assert (testProductList1  == testProductList2)
+
     }
 
     @Test
     fun database_should_return_products_with_lower_price_than() {
         // given
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
+        val product2 = database.createProduct("youssef", 100.0f)
+        val product3 = database.createProduct("youssef2", 100.0f)
+        val product4 = database.createProduct("youpii", 10000.0f)
+        val product5 = database.createProduct("yauhoo", 101.0f)
+        val product6 = database.createProduct("yoaahoo", 99.0f)
+        val product7 = database.createProduct("yauyou", 200.0f)
+        val product8 = database.createProduct("y", 100000.0f)
+
         // when
+        val testProductList1 = database.lowerPrice(100.0f)
+        val testProductList2 = listOf(product1, product6)
+
         // then
+        assert (testProductList1  == testProductList2)
     }
 
     // endregion
@@ -114,15 +159,33 @@ class ProductDatabaseTest {
     @Test
     fun database_should_update_product_name_given_an_id_and_new_name() {
         // given
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
+        val product2 = database.createProduct("youssef", 100.0f)
+
         // when
+        database.changeName(product1!!.id, "youssef")
+        database.changeName(product2!!.id, "quentin")
+
         // then
+        assert(product1.name == "youssef")
+        assert(product2.name == "quentin")
     }
 
     @Test
     fun database_should_update_product_price_given_an_id_and_new_price() {
         // given
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
+        val product2 = database.createProduct("youssef", 100.0f)
+
         // when
+        database.changePrice(product1!!.id, 100.0f)
+        database.changePrice(product2!!.id, 10.0f)
+
         // then
+        assert(product1.price== 100.0f)
+        assert(product2.price== 10.0f)
     }
 
     // endregion
@@ -131,7 +194,16 @@ class ProductDatabaseTest {
     @Test
     fun database_should_delete_a_product_given_an_id() {
         // given
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
+        val product2 = database.createProduct("youssef", 100.0f)
+        val product3 = database.createProduct("youssef2", 100.0f)
+
         // when
+        val testProductList1 = database.deleteItem(product2!!.id)
+        val testProductList2 = listOf(product1, product3)
+
         // then
+        //assert(testProductList1  == testProductList2)
     }
 }
