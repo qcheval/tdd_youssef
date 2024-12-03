@@ -1,6 +1,7 @@
 package cars.ampere.mvc_basics
 
 import cars.ampere.mvc_basics.db.ProductDatabase
+import cars.ampere.mvc_basics.model.Product
 import org.junit.Test
 import java.util.UUID
 
@@ -59,21 +60,30 @@ class ProductDatabaseTest {
     @Test
     fun database_returns_all_products() {
         // given a database with at least 2 products created
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
+        val product2 = database.createProduct("youssef", 100.0f)
 
         // when i request all products from database
+        val all_products = database.request_products_from_database(database.productList)
 
         // then database should return all products.
         // List size is the same as the number of products created in the given above
+        assert(all_products == database.productList.size)
 
     }
 
     @Test
     fun get_product_by_id_returns_the_right_product() {
         // given a database with at least one product created
+        val database: ProductDatabase = ProductDatabase()
+        val product1 = database.createProduct("quentin", 10.0f)
 
         // when i request a product from the database with a specific id
+        val product_test = database.request_a_product_from_the_data_base_wiht_an_id(product1.id)
 
         // then the database returns the right product (similar id, name and price)
+        assert(product1 == product_test)
     }
 
     @Test
