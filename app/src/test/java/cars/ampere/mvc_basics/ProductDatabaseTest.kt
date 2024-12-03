@@ -66,6 +66,7 @@ class ProductDatabaseTest {
         // List size is the same as the number of products created in the given above
 
     }
+
     @Test
     fun get_product_by_id_returns_the_right_product() {
         // given a database with at least one product created
@@ -75,6 +76,52 @@ class ProductDatabaseTest {
         // then the database returns the right product (similar id, name and price)
     }
 
+    @Test
+    fun database_should_return_product_starting_with_string() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    fun database_should_return_products_with_higher_price_than() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    fun database_should_return_products_with_lower_price_than() {
+        // given
+        // when
+        // then
+    }
 
     // endregion
+
+    //region: Update
+
+    @Test
+    fun database_should_update_product_name_given_an_id_and_new_name() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    fun database_should_update_product_price_given_an_id_and_new_price() {
+        // given
+        // when
+        // then
+    }
+
+    // endregion
+
+    // region: Delete
+    @Test
+    fun database_should_delete_a_product_given_an_id() {
+        // given
+        // when
+        // then
+    }
 }
