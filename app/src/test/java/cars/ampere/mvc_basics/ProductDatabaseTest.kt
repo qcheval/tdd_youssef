@@ -89,7 +89,7 @@ class ProductDatabaseTest {
 
     @Test
     fun database_should_return_product_starting_with_string() {
-        /*
+
         // given
         val database: ProductDatabase = ProductDatabase()
         val product1 = database.createProduct("quentin", 10.0f)
@@ -103,10 +103,10 @@ class ProductDatabaseTest {
 
         // when
         val testProductList1 = database.grepForProducts("you")
-        val testProductList2 = listOf(product2, product3, product4)
+        val testProductList2 = listOf(product2, product3, product4,product7)
         // then
         assert (testProductList1  == testProductList2)
-        */
+
     }
 
     @Test
@@ -127,7 +127,11 @@ class ProductDatabaseTest {
         val testProductList2 = listOf(product4, product5, product7, product8)
 
         // then
-        assert (testProductList1  == testProductList2)
+        for (i in 0..<testProductList1.size){
+            assert(testProductList1[i].id == testProductList2[i]!!.id)
+            assert(testProductList1[i].name == testProductList2[i]!!.name)
+            assert(testProductList1[i].price == testProductList2[i]!!.price)
+        }
 
     }
 
@@ -149,7 +153,11 @@ class ProductDatabaseTest {
         val testProductList2 = listOf(product1, product6)
 
         // then
-        assert (testProductList1  == testProductList2)
+        for (i in 0..<testProductList1.size){
+            assert(testProductList1[i].id == testProductList2[i]!!.id)
+            assert(testProductList1[i].name == testProductList2[i]!!.name)
+            assert(testProductList1[i].price == testProductList2[i]!!.price)
+        }
     }
 
     // endregion
@@ -200,10 +208,15 @@ class ProductDatabaseTest {
         val product3 = database.createProduct("youssef2", 100.0f)
 
         // when
-        val testProductList1 = database.deleteItem(product2!!.id)
+        database.deleteItem(product2!!.id)
+        val testProductList1 = database.getProductList()
         val testProductList2 = listOf(product1, product3)
 
         // then
-        //assert(testProductList1  == testProductList2)
+        for (i in 0..<testProductList1.size){
+            assert(testProductList1[i].id == testProductList2[i]!!.id)
+            assert(testProductList1[i].name == testProductList2[i]!!.name)
+            assert(testProductList1[i].price == testProductList2[i]!!.price)
+        }
     }
 }

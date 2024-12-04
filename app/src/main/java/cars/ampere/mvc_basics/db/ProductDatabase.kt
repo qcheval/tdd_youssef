@@ -28,39 +28,33 @@ class ProductDatabase {
         }
     }
 
-    fun higherPrice(p: Float): ArrayList<Product>{
-        val tempProductList: ArrayList<Product> = ArrayList()
-        for (i in 0..(productList.size-1)) {
-            if(productList[i].price > p) {
-                tempProductList.add(productList[i])
+    fun higherPrice(p: Float): ArrayList<Product> {
+        return ArrayList(
+            productList.filter {
+                it.price > p
             }
-        }
-            return tempProductList
+        )
     }
 
-    fun lowerPrice(p: Float): ArrayList<Product>{
-        val tempProductList: ArrayList<Product> = ArrayList()
-        for (i in 0..(productList.size-1)) {
-            if(productList[i].price < p) {
-                tempProductList.add(productList[i])
+    fun lowerPrice(p: Float): ArrayList<Product> {
+        return ArrayList(
+            productList.filter {
+                it.price < p
             }
-        }
-        return tempProductList
+        )
     }
 
-    fun changeName (id: UUID, newName: String) {
-        for (i in 0..(productList.size-1)) {
-            if (id == productList[i].id) {
-                productList[i].name = newName
-            }
+    fun changeName(id: UUID, newName: String) {
+        productList.find {
+            it.id == id }?.let{
+            it.name = newName
         }
     }
 
     fun changePrice (id: UUID, newPrice: Float) {
-        for (i in 0..(productList.size-1)) {
-            if (id == productList[i].id) {
-                productList[i].price = newPrice
-            }
+        productList.find {
+            it.id == id }?.let{
+            it.price = newPrice
         }
     }
 
@@ -68,6 +62,14 @@ class ProductDatabase {
         productList.removeIf {
             it.id == id
         }
+    }
+
+    fun grepForProducts(s: String): ArrayList<Product> {
+        return ArrayList(
+            productList.filter {
+                it.name.contains(s)
+            }
+        )
     }
 
 }
